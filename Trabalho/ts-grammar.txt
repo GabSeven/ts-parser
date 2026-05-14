@@ -1,0 +1,11 @@
+program:     definition* function* call*
+function:    NAME "{" statement* "}" end
+end:
+?statement:  definition | attribution | function | call
+definition:  "var" NAME
+attribution: NAME "=" NUMBER
+call:        NAME "()"
+
+NAME:   /\w+/
+NUMBER: /\d+/
+%ignore /[ \t\n\r]+/
