@@ -1,0 +1,41 @@
+start:  program
+program: (block | definition | attribution | def_att | function | call | enter)*
+block:  "{" program? "}" end
+end:
+endstastment: (";"enter?|enter)?
+enter: LINEFEED|CARRIAGE_LINEFEED
+
+definition: var_def | let_def
+var_def: VAR NAME ("," NAME)* (":" TYPE)? endstastment
+let_def: LET NAME ("," NAME)* (":" TYPE)? endstastment
+
+def_att: var_def_att | let_def_att
+var_def_att: VAR NAME (":" TYPE)? "=" value endstastment
+let_def_att: LET NAME (":" TYPE)? "=" value endstastment
+
+attribution: NAME "=" value endstastment
+
+value: NAME
+
+function: FUNCTION NAME "("(NAME ":" TYPE)*")" "{"program "return" TYPE?"}" end
+call:   NAME"(" ")" 
+
+
+VAR.3: "var"
+LET.3: "let"
+FUNCTION.3: "function"
+L_PAREN.2: "("
+R_PAREN.2: ")"
+L_COL.2: "{"
+R_COL.2: "}"
+SEMICOLON.2: ";"
+COLON.2: ":"
+COMMA.2: ","
+TYPE:   "number"
+NAME:   /\w+/
+NUMBER: /\d+/
+CARRIAGE_LINEFEED: /\r\n/
+LINEFEED: /\n/
+%ignore /[ \t\r]+/
+%ignore /\/\/[^\n]*/
+%ignore /\/\**\*\//
