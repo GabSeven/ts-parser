@@ -2,6 +2,8 @@ fun global
 def global:x
 def global:y
 
+log global:y
+
 set global:x 1
 
 def global:x-1
