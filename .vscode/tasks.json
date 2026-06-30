@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "validate-grammar",
+			"type": "shell",
+			"command": "py",
+			"args": [
+				"-c",
+				"from lark import Lark; Lark.open('typeScript-grammar.lark', parser='lalr'); print('grammar ok')"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
+}

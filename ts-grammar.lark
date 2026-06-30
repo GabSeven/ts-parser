@@ -1,0 +1,8 @@
+?start: program
+?program: (_NEWLINE | stmt)*
+
+?stmt: simple_stmt | compound_stmt
+?simple_stmt: 
+
+COMMENT: /\/\/[^\n]*/ |  /\/\**\*\//
+_NEWLINE: ( /\r?\n[\t ]*/ | COMMENT )+
