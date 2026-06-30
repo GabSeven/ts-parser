@@ -44,7 +44,6 @@ void = object()
 any_type = {"number", "void"}
 
 def typeof(value: Tree):
-    print(value)
     return value.data
 
 class Variable():
@@ -347,12 +346,12 @@ class Walker(Interpreter):
         items = tree.children
         symbol_table.att(items[0], items[1])
 
-    def attribution(self, tree:Tree[Token]):
-        global symbol_table
+    # def attribution(self, tree:Tree[Token]):
+    #     global symbol_table
 
-        items = tree.children
-        for i in range(0, len(items), 2):
-            symbol_table.att(items[i], items[i+1])
+    #     items = tree.children
+    #     for i in range(0, len(items), 2):
+    #         symbol_table.att(items[i], items[i+1])
 
     def access(self, tree: Tree[Token]) -> Variable:
         global symbol_table
@@ -374,8 +373,15 @@ def main():
         tree = parser.parse(program.read())
 
     Builder().visit(tree)
+    print(tree.pretty())
+    # for key, value in scope_symbol_table.items():
+    #     rich.print(key, value)
+
     Walker().visit(tree)
-    Walker().visit(tree)
+    print(tree.pretty())
+    # for key, value in scope_symbol_table.items():
+    #     rich.print(key, value)
+
 
 if __name__ == "__main__" and len(argv) == 2:
     try:

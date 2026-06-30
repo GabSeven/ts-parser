@@ -1,0 +1,16 @@
+fun global
+def global:x
+def global:y
+
+set global:x 1
+
+def global:x-1
+set global:x-1 2
+log global:x-1
+
+log global:x
+
+set global:y 3
+
+log global:y
+ret

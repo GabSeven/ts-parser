@@ -1,0 +1,42 @@
+?start: program
+program: (_NEWLINE | _statement _sep?)*
+block: "{" program? "}"
+
+_statement: print | block | _definition | attribution | function | call | atom
+_sep: ";" _NEWLINE* | _NEWLINE+
+
+?atom: NAME -> access
+    | NUMBER
+    
+_definition: (_var_def | _let_def)
+
+_var_def: "var" (v_def | v_att) ("," (v_def | v_att))*
+v_def: NAME (":" type)?
+v_att: NAME (":" type)? "=" value
+
+_let_def: "let" (l_def | l_att) ("," (l_def | l_att))*
+l_def: NAME (":" type)?
+l_att: NAME (":" type)? "=" value
+
+attribution: NAME "=" value ("," NAME "=" value)*
+
+?value: NUMBER -> number
+
+print: "console.log(" NAME?  ")"
+function: "function" NAME "()" (":" type)? "{" program? return? _statement? "}"
+return: "return" (NAME|NUMBER)? _sep
+call:   NAME"(" ")" 
+
+type: TYPE | (TYPE ("|" TYPE)*)   
+
+CONSOLELOG.2: "console.log("
+TYPE:   "number" | "any" | "string"
+%import common.CNAME -> NAME
+NUMBER: /\d+/
+COMMENT: /\/\**\*\// | /\/\/[^\n]*/
+_NEWLINE: /\r?\n[\t ]*/
+CARRIAGE_LINEFEED: /\r\n/
+LINEFEED: /\n/
+
+%ignore COMMENT
+%ignore /[ \t\r]+/

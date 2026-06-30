@@ -1,0 +1,8 @@
+fun global
+def_var global:a1
+def_let global:b
+set global:b 12
+log global:a1
+
+def_var:number global:a2
+set 
